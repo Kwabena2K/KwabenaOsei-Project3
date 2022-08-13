@@ -53,7 +53,7 @@ function App() {
         />
 
         {typeof weatherData.main === "undefined" ? (
-          <div>
+          <div className="query">
             <p>How's the weather looking right now?</p>
           </div>
         ) : (

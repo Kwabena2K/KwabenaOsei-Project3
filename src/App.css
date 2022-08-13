@@ -119,3 +119,8 @@ footer p {
   font-weight: 700;
   text-transform: capitalize;
 }
+
+.query {
+  font-size: 40px;
+  font-weight: 700;
+}

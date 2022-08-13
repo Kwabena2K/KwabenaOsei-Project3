@@ -9,43 +9,80 @@ function App() {
 
   // Creating the call to the API to retrieve the data
   const getWeather = (event) => {
+    // const listEl = document.createElement("li")
+    // const imgGrid = document.createElement(".inventory")
     if (event.key === "Enter") {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityData}&appid=${key}&units=metric&lang=en`
       )
-        .then((response) => response.json())
-        .then((data) => {
-          setWeather(data);
+        .then((results) => results.json())
+        .then((jsonData) => {
+          setWeather(jsonData);
         });
     }
+
+    // listEl.innerHTML = `
+    // <div class="card">
+    //         <div class="weatherPoster">
+    //           <img
+    //           src= "https://image.tmdb.org/t/p/w500${arrayItem.poster_path}"
+    //           alt = "a poster of the movie ${arrayItem.title}"
+    //           title = "${arrayItem.title}"
+
+    //           />
+    //           <div class="content">
+    //           <p>${arrayItem.overview}</p>
+    //         </div>
+    //         </div>
+
+    // `;
   };
 
   //console.log(weatherData);
 
+  // Connecting the weatherData call from the API to the input form and also Displaying data from getWeather
   return (
-    // Connecting the weatherData call from the API to the input form and also Displaying data from getWeather
-    <div className="wrapper">
-      <input
-        className="input"
-        placeholder="Please enter a location"
-        onChange={(event) => setCity(event.target.value)}
-        value={cityData}
-        onKeyPress={getWeather}
-      />
+    <section className="home">
+      <div className="wrapper">
+        <input
+          className="input"
+          placeholder="Please enter a location"
+          onChange={(event) => setCity(event.target.value)}
+          value={cityData}
+          onKeyPress={getWeather}
+        />
 
-      {typeof weatherData.main === "undefined" ? (
-        <div>
-          <p>How's the weather looking right now?</p>
-        </div>
-      ) : (
-        <div>
-          <p>Location: {weatherData.name}</p>
-          <p>Temperature: {Math.round(weatherData.main.temp)}°C</p>
-          <p>Humidity: {weatherData.main.humidity}</p>
-          <p>Feels like: {weatherData.main.feels_like}</p>
-        </div>
-      )}
-    </div>
+        {typeof weatherData.main === "undefined" ? (
+          <div>
+            <p>How's the weather looking right now?</p>
+          </div>
+        ) : (
+          <div className="weatherData">
+            {/* <p className="city">{weatherData.name}</p> */}
+            <div className="temp">
+              <p className="bold">{Math.round(weatherData.main.temp)}°C</p>
+              <p className="text">Temperature</p>
+            </div>
+            <div className="humidity">
+              <p className="bold">{weatherData.main.humidity}%</p>
+              <p className="text">Humidity</p>
+            </div>
+            <div className="feelsLike">
+              <p className="bold">
+                {Math.round(weatherData.main.feels_like)}°C
+              </p>
+              <p className="text">Feels Like</p>
+            </div>
+            <div className="description">
+              <p className="bold">{weatherData.weather[0].description}</p>
+              <p className="text">Description</p>
+            </div>
+          </div>
+        )}
+
+        {weatherData.cod === "404" ? <p>Please enter a valid city</p> : <></>}
+      </div>
+    </section>
   );
 }
 

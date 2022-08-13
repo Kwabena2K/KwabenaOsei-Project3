@@ -73,10 +73,6 @@ function App() {
               </p>
               <p className="text">Feels Like</p>
             </div>
-            <div className="description">
-              <p className="bold">{weatherData.weather[0].description}</p>
-              <p className="text">Description</p>
-            </div>
           </div>
         )}
 

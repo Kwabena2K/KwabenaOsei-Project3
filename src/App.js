@@ -9,8 +9,6 @@ function App() {
 
   // Creating the call to the API to retrieve the data
   const getWeather = (event) => {
-    // const listEl = document.createElement("li")
-    // const imgGrid = document.createElement(".inventory")
     if (event.key === "Enter") {
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${cityData}&appid=${key}&units=metric&lang=en`
@@ -18,67 +16,111 @@ function App() {
         .then((results) => results.json())
         .then((jsonData) => {
           setWeather(jsonData);
+          setCity("");
         });
     }
-
-    // listEl.innerHTML = `
-    // <div class="card">
-    //         <div class="weatherPoster">
-    //           <img
-    //           src= "https://image.tmdb.org/t/p/w500${arrayItem.poster_path}"
-    //           alt = "a poster of the movie ${arrayItem.title}"
-    //           title = "${arrayItem.title}"
-
-    //           />
-    //           <div class="content">
-    //           <p>${arrayItem.overview}</p>
-    //         </div>
-    //         </div>
-
-    // `;
   };
 
-  //console.log(weatherData);
+  // // Retrieving the date
+
+  // const getDate = (d) => {
+  //   let months = [
+  //     "January",
+  //     "February",
+  //     "March",
+  //     "April",
+  //     "May",
+  //     "June",
+  //     "July",
+  //     "August",
+  //     "September",
+  //     "October",
+  //     "November",
+  //     "December",
+  //   ];
+  //   let days = [
+  //     "Sunday",
+  //     "Monday",
+  //     "Tuesday",
+  //     "Wednesday",
+  //     "Thursday",
+  //     "Friday",
+  //     "Saturday",
+  //   ];
+
+  //     let day = days[d.getDay()];
+  //     let date = d.getDate();
+  //     let month = months[d.getMonth()];
+  //     let year = d.getFullYear();
+
+  //     return `${day} ${date} ${month} ${year}`;
+  // };
+
+  console.log(weatherData);
 
   // Connecting the weatherData call from the API to the input form and also Displaying data from getWeather
   return (
-    <section className="home">
-      <div className="wrapper">
-        <input
-          className="input"
-          placeholder="Please enter a location"
-          onChange={(event) => setCity(event.target.value)}
-          value={cityData}
-          onKeyPress={getWeather}
-        />
+    <main>
+      <div
+        className={
+          typeof weatherData.main != "undefined"
+            ? weatherData.main.temp > 15
+              ? "app hot"
+              : "app cold"
+            : "app default"
+        }
+      >
+        <div className="wrapper">
+          <input
+            className="input"
+            placeholder="Weather in your city"
+            onChange={(event) => setCity(event.target.value)}
+            value={cityData}
+            onKeyPress={getWeather}
+          />
 
-        {typeof weatherData.main === "undefined" ? (
-          <div className="query">
-            <p>How's the weather looking right now?</p>
-          </div>
-        ) : (
-          <div className="weatherData">
-            {/* <p className="city">{weatherData.name}</p> */}
-            <div className="temp">
-              <p className="bold">{Math.round(weatherData.main.temp)}°C</p>
-              <p className="text">Temperature</p>
-            </div>
-            <div className="humidity">
-              <p className="bold">{weatherData.main.humidity}%</p>
-              <p className="text">Humidity</p>
-            </div>
-            <div className="feelsLike">
-              <p className="bold">
-                {Math.round(weatherData.main.feels_like)}°C
+          {typeof weatherData.main === "undefined" ? (
+            <div className="query">Search for a city</div>
+          ) : (
+            <div className="city">
+              <p>
+                {weatherData.name}, {weatherData.sys.country}
               </p>
-              <p className="text">Feels Like</p>
-            </div>
-          </div>
-        )}
 
-        {weatherData.cod === "404" ? <p>Please enter a valid city</p> : <></>}
+              <div className="weatherIcon">
+                <img
+                  src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
+                  alt="weather icon"
+                />
+              </div>
+
+              <div className="weatherData">
+                <div className="temp">
+                  <p className="bold">{Math.round(weatherData.main.temp)}°C</p>
+                  <p className="text">Temperature</p>
+                </div>
+                <div className="humidity">
+                  <p className="bold">{weatherData.main.humidity}%</p>
+                  <p className="text">Humidity</p>
+                </div>
+                <div className="feelsLike">
+                  <p className="bold">
+                    {Math.round(weatherData.main.feels_like)}°C
+                  </p>
+                  <p className="text">Feels like</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {weatherData.cod === "404" ? (
+            <p className="error">Please enter a valid city</p>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-    </section>
+    </main>
   );
 }
 

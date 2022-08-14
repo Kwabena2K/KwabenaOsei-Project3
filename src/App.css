@@ -43,6 +43,18 @@
   justify-content: center;
   align-items: center;
   padding: 25px;
+  margin: 0px auto;
+  max-width: 1080px;
+  width: 90%;
+}
+
+main {
+  /* min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.75)
+  );
+  padding: 25px; */
 }
 
 .input {
@@ -59,8 +71,10 @@
 }
 
 .wrapper .city {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 700;
+  text-align: center;
+  color: white;
 }
 
 footer {
@@ -78,16 +92,38 @@ footer p {
   padding: 20px;
 }
 
-.home {
-  position: relative;
+.app.default {
+  background-image: url("./assets/background-default.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0);
-  color: white;
 }
 
-.home::before {
-  background: url("./assets/background-image3.jpg") no-repeat center
+.app.hot {
+  background-image: url("./assets/background-image-hot.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  transition: 0.4s ease-out;
+  opacity: 0.95;
+}
+
+.app.cold {
+  background-image: url("./assets/background-image-cold.jpg");
+  /* opacity: 0.9; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+
+/* .home::before {
+  background: url("./assets/background-image1.jpg") no-repeat center
     center/cover;
   content: "";
   position: absolute;
@@ -96,31 +132,56 @@ footer p {
   top: 0;
   left: 0;
   z-index: -1;
-}
+} */
 
 .wrapper .weatherData {
-  color: rgb(255, 255, 255);
+  color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  width: 50%;
-  margin: 150px auto;
-  font-size: 30px;
+  width: 100%;
+  /* margin: 150px auto; */
+
   padding: 1rem;
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.699);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* .temp,
+.weatherIcon {
+  display: inline-block;
+} */
+
 .weatherData .text {
-  text-transform: capitalize;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  font-size: 30px;
+  /* border: 2px solid red; */
 }
 
 .weatherData .bold {
   font-weight: 700;
+  font-size: 40px;
+  text-align: center;
   text-transform: capitalize;
+  /* border: 2px solid red; */
+  padding: 0;
 }
 
 .query {
+  padding: 50px;
   font-size: 40px;
   font-weight: 700;
+  color: white;
+}
+
+.error {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.weatherIcon img {
+  width: 150px;
+  height: 150px;
 }

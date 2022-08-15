@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  font-family: "Roboto Mono", sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Roboto Mono, Menlo, Monaco, Consolas,
+  font-family: source-code-pro, Roboto Flex, Menlo, Monaco, Consolas,
     "Courier New", monospace;
 }
 
@@ -112,7 +112,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: sans-serif;
+  font-family: "Roboto Flex", sans-serif;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;

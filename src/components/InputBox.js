@@ -8,15 +8,16 @@ import React from "react";
 // } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 function InputBox() {
-  const [data, setData] = useState({});
   const [location, setLocation] = useState("");
-  const [newTemp, updateNewTemp] = useState(null);
-  const [newHumidity, updateNewHumidity] = useState(null);
-  const [newSunset, updateNewSunset] = useState(null);
-  const [newSunrise, updateNewSunrise] = useState(null);
-  const [newCountry, updateNewCountry] = useState(null);
+  const [city, updateCity] = useState("");
+  const [country, updateCountry] = useState("");
+  const [temperature, updateTemperature] = useState(null);
+  const [humidity, updateHumidity] = useState(null);
+  const [sunrise, updateSunrise] = useState(null);
+  const [sunset, updateSunset] = useState(null);
+  const [feelsLike, updateFeelsLike] = useState(null);
   const [description, updateDescription] = useState(null);
-  const [icon, updateIcon] = useState(null);
+  // const [icon, updateIcon] = useState(null);
 
   const key = `5783354b44651863d0bd15ae06c6a392`;
 
@@ -26,16 +27,16 @@ function InputBox() {
         .get(
           `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric&lang=en`
         )
-        .then((response) => {
-          setData(response.data);
-          updateNewTemp(response.data.main.temp);
-          updateNewHumidity(response.data.main.humidity);
-          updateNewSunset(response.data.sys.sunset);
-          updateNewSunrise(response.data.sys.sunrise);
-          updateNewCountry(response.data.sys.country);
-          updateDescription(response.data.weather[0].description);
-          updateIcon(response.data.weather[0].icon);
-          console.log(response.data);
+        .then((weatherData) => {
+          updateTemperature(weatherData.data.main.temp);
+          updateSunset(weatherData.data.sys.sunset);
+          updateSunrise(weatherData.data.sys.sunrise);
+          updateHumidity(weatherData.data.main.humidity);
+          updateCity(weatherData.data.name);
+          updateCountry(weatherData.data.sys.country);
+          updateFeelsLike(weatherData.data.main.feels_like);
+          updateDescription(weatherData.data.weather[0].description);
+          // console.log(weatherData.data);
 
           // Weather icon changing on userInput
           //       if (icon === "Clouds") {
@@ -49,11 +50,9 @@ function InputBox() {
         });
       setLocation("");
     }
-
-    // Changing the logo based on description of input from user
   };
   return (
-    // Connecting the weatherData call from the API to the input form and also Displaying data from getWeather
+    // Connecting the weatherData call from the API to the input and also Displaying data from findLocation
     <div className="location">
       <div className="searchBox">
         <input
@@ -68,18 +67,21 @@ function InputBox() {
       <div className="content">
         <div className="header">
           <h2>
-            {data.name} ({newCountry})
+            {city} {country}
           </h2>
-          <p>{Math.round(newTemp)}°C</p>
+          <p>{Math.round(temperature)}°C</p>
           <h3>{description}</h3>
         </div>
         <div className="content-child">
-          <p>Humidity: {Math.round(newHumidity)}%</p>
+          <p>Feels Like: {Math.round(feelsLike)}%</p>
+        </div>
+        <div className="content-child">
+          <p>Humidity: {Math.round(humidity)}%</p>
         </div>
         <div className="content-child">
           <p>
             Sunrise:{" "}
-            {new Date(newSunrise * 1000).toLocaleTimeString("en-IN", {
+            {new Date(sunrise * 1000).toLocaleTimeString("en-IN", {
               hour: "2-digit",
               minute: "2-digit",
             })}
@@ -89,14 +91,14 @@ function InputBox() {
           <p>
             {" "}
             Sunset:{" "}
-            {new Date(newSunset * 1000).toLocaleTimeString("en-IN", {
+            {new Date(sunset * 1000).toLocaleTimeString("en-IN", {
               hour: "2-digit",
               minute: "2-digit",
             })}
           </p>
         </div>
       </div>
-      <div className="icons">{icon}</div>
+      {/* <div className="icons">{icon}</div> */}
     </div>
   );
 }

@@ -3,38 +3,37 @@ import axios from "axios";
 import Header from "./components/Header";
 import Card from "./components/Card";
 import InputBox from "./components/InputBox";
-import Weather from "./components/Weather";
 // import Forecast from "./components/Forecast";
 import "./App.css";
 
 const key = `5783354b44651863d0bd15ae06c6a392`;
 
 function App() {
-  const [latitude, updateLatitude] = useState(null);
-  const [longitude, updateLongitude] = useState(null);
+  const [latitude, updateLatitude] = useState({});
+  const [longitude, updateLongitude] = useState({});
   const [city, updateCity] = useState("");
   const [country, updateCountry] = useState("");
   const [temperature, updateTemperature] = useState(null);
   const [humidity, updateHumidity] = useState(null);
   const [sunrise, updateSunrise] = useState(null);
   const [sunset, updateSunset] = useState(null);
+  const [feelsLike, updateFeelsLike] = useState(null);
   const [description, updateDescription] = useState(null);
-  // const [forecast, updateForecast] = useState([]);
+
+  // Console log to check if API call is not showing the correct longitude and latitude
+  // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`;
+  // console.log(url);
 
   // Function to retrieve current location using geolocation
   // Functions below to retrieve data from API and update the HTML
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        updateLatitude(position.coords.latitude);
-        updateLongitude(position.coords.longitude);
-      }
-      // (error) => console.warn(error.message),
-      // { enableHighAccuracy: false, timeout: 10000 }
-    );
+    navigator.geolocation.getCurrentPosition(function (position) {
+      updateLatitude(position.coords.latitude);
+      updateLongitude(position.coords.longitude);
+    });
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&exlude=hourly,minutely&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`
       )
       .then((weatherData) => {
         console.log(weatherData);
@@ -44,9 +43,21 @@ function App() {
         updateHumidity(weatherData.data.main.humidity);
         updateCity(weatherData.data.name);
         updateCountry(weatherData.data.sys.country);
+        updateFeelsLike(weatherData.data.main.feels_like);
         updateDescription(weatherData.data.weather[0].description);
-        // updateForecast(weatherData.data.daily);
-        // console.log(weatherData.data.weather[0].main);
+
+        //Local time is a little off
+        // console.log(
+        //   new Date(
+        //     weatherData.data.dt * 1000 - weatherData.data.timezone * 1000
+        //   )
+        // );
+        // // minus
+        // console.log(
+        //   new Date(
+        //     weatherData.data.dt * 1000 + weatherData.data.timezone * 1000
+        //   )
+        // ); // plus
       });
   }, [latitude, longitude]);
 
@@ -62,8 +73,9 @@ function App() {
         city={city}
         country={country}
         description={description}
+        feelsLike={feelsLike}
       />
-      {/* <Forecast forecast={forecast} temperature={temperature} /> */}
+      {/* <Forecast /> */}
     </div>
   );
 }

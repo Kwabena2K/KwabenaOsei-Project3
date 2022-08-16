@@ -1,6 +1,12 @@
 import axios from "axios";
 import React from "react";
-import { useEffect, useState } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faCloud,
+//   faCloudRain,
+//   faSmog,
+// } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 function InputBox() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
@@ -9,9 +15,12 @@ function InputBox() {
   const [newSunset, updateNewSunset] = useState(null);
   const [newSunrise, updateNewSunrise] = useState(null);
   const [newCountry, updateNewCountry] = useState(null);
+  const [description, updateDescription] = useState(null);
+  const [icon, updateIcon] = useState(null);
+
   const key = `5783354b44651863d0bd15ae06c6a392`;
 
-  const searchLocation = (event) => {
+  const findLocation = (event) => {
     if (event.key === "Enter") {
       axios
         .get(
@@ -24,12 +33,25 @@ function InputBox() {
           updateNewSunset(response.data.sys.sunset);
           updateNewSunrise(response.data.sys.sunrise);
           updateNewCountry(response.data.sys.country);
+          updateDescription(response.data.weather[0].description);
+          updateIcon(response.data.weather[0].icon);
           console.log(response.data);
+
+          // Weather icon changing on userInput
+          //       if (icon === "Clouds") {
+          //         icon = (
+          //           <img
+          //             src={`http://openweathermap.org/img/w/${icon}.png`}
+          //             alt="weather image"
+          //           />
+          //         );
+          //       }
         });
       setLocation("");
     }
-  };
 
+    // Changing the logo based on description of input from user
+  };
   return (
     // Connecting the weatherData call from the API to the input form and also Displaying data from getWeather
     <div className="location">
@@ -39,30 +61,42 @@ function InputBox() {
           placeholder="Please enter a location"
           onChange={(event) => setLocation(event.target.value)}
           value={location}
-          onKeyPress={searchLocation}
+          onKeyPress={findLocation}
         />
       </div>
-      <div className="header">
-        ({data.name},{newCountry})
+
+      <div className="content">
+        <div className="header">
+          <h2>
+            {data.name} ({newCountry})
+          </h2>
+          <p>{Math.round(newTemp)}°C</p>
+          <h3>{description}</h3>
+        </div>
+        <div className="content-child">
+          <p>Humidity: {Math.round(newHumidity)}%</p>
+        </div>
+        <div className="content-child">
+          <p>
+            Sunrise:{" "}
+            {new Date(newSunrise * 1000).toLocaleTimeString("en-IN", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+        </div>
+        <div className="content-child">
+          <p>
+            {" "}
+            Sunset:{" "}
+            {new Date(newSunset * 1000).toLocaleTimeString("en-IN", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </p>
+        </div>
       </div>
-      <div className="card-child">
-        Temperature: {""} {Math.round(newTemp)}°C
-      </div>
-      <div className="card-child">Humidity: {Math.round(newHumidity)}%</div>
-      <div className="card-child">
-        Sunrise:{" "}
-        {new Date(newSunrise * 1000).toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
-      </div>
-      <div className="card-child">
-        Sunset:{" "}
-        {new Date(newSunset * 1000).toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
-      </div>
+      <div className="icons">{icon}</div>
     </div>
   );
 }

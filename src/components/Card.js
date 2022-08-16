@@ -6,19 +6,22 @@ function Card({
   humidity,
   city,
   sunset,
-  description,
   country,
+  feelsLike,
 }) {
   return (
     <div className="card">
       <div className="header">
         <h2>Your weather information:</h2>
-        <h3>
+        <h4>
           {city}, {country}
-        </h3>
+        </h4>
       </div>
       <div className="card-child">
         <p>Temperature:</p> {Math.round(temperature)}°C
+      </div>
+      <div className="card-child">
+        <p>Feels Like:</p> {Math.round(feelsLike)}°C
       </div>
       <div className="card-child">
         <p>Humidity:</p> {humidity}%

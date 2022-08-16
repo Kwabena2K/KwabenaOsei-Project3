@@ -36,8 +36,6 @@ function InputBox() {
           updateCountry(weatherData.data.sys.country);
           updateFeelsLike(weatherData.data.main.feels_like);
           updateDescription(weatherData.data.weather[0].description);
-          // console.log(weatherData.data);
-
           // Weather icon changing on userInput
           //       if (icon === "Clouds") {
           //         icon = (
@@ -52,7 +50,7 @@ function InputBox() {
     }
   };
   return (
-    // Connecting the weatherData call from the API to the input and also Displaying data from findLocation
+    // returning values based on userInput
     <div className="location">
       <div className="searchBox">
         <input

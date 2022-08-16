@@ -8,8 +8,8 @@ import "./App.css";
 const key = `5783354b44651863d0bd15ae06c6a392`;
 
 function App() {
-  const [latitude, updateLatitude] = useState("43.6");
-  const [longitude, updateLongitude] = useState("-79.3");
+  const [latitude, updateLatitude] = useState("43.6532");
+  const [longitude, updateLongitude] = useState("-79.3337021");
   const [city, updateCity] = useState("");
   const [country, updateCountry] = useState("");
   const [temperature, updateTemperature] = useState(null);
@@ -18,20 +18,6 @@ function App() {
   const [sunset, updateSunset] = useState(null);
   const [feelsLike, updateFeelsLike] = useState(null);
   const [description, updateDescription] = useState(null);
-
-  // Potential fix
-  // useEffect(() => {
-  //   const updateCity = async () => {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       updateLatitude(position.coords.latitude);
-  //       updateLongitude(position.coords.longitude);
-
-  //       const result = axios.get(
-  //         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`
-  //       );
-  //     });
-  //   };
-  // });
 
   // logic to retrieve current location using geolocation
 
@@ -48,7 +34,6 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}&units=metric`
       )
       .then((weatherData) => {
-        // console.log(weatherData);
         updateTemperature(weatherData.data.main.temp);
         updateSunset(weatherData.data.sys.sunset);
         updateSunrise(weatherData.data.sys.sunrise);
@@ -61,19 +46,21 @@ function App() {
   }, [latitude, longitude]);
 
   return (
-    <div className="main">
-      <Header />
-      <InputBox />
-      <Card
-        temperature={temperature}
-        humidity={humidity}
-        sunset={sunset}
-        sunrise={sunrise}
-        city={city}
-        country={country}
-        description={description}
-        feelsLike={feelsLike}
-      />
+    <div className="app">
+      <div className="main">
+        <Header />
+        <InputBox />
+        <Card
+          temperature={temperature}
+          humidity={humidity}
+          sunset={sunset}
+          sunrise={sunrise}
+          city={city}
+          country={country}
+          description={description}
+          feelsLike={feelsLike}
+        />
+      </div>
     </div>
   );
 }

@@ -17,6 +17,7 @@ function InputBox() {
   const [sunset, updateSunset] = useState(null);
   const [feelsLike, updateFeelsLike] = useState(null);
   const [description, updateDescription] = useState(null);
+  // const [weather, updateWeather] = useState(null);
   // const [icon, updateIcon] = useState(null);
 
   const key = `5783354b44651863d0bd15ae06c6a392`;
@@ -28,6 +29,7 @@ function InputBox() {
           `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric&lang=en`
         )
         .then((weatherData) => {
+          // updateWeather(weatherData.data.weather[0].icon);
           updateTemperature(weatherData.data.main.temp);
           updateSunset(weatherData.data.sys.sunset);
           updateSunrise(weatherData.data.sys.sunrise);
@@ -36,16 +38,9 @@ function InputBox() {
           updateCountry(weatherData.data.sys.country);
           updateFeelsLike(weatherData.data.main.feels_like);
           updateDescription(weatherData.data.weather[0].description);
-          // Weather icon changing on userInput
-          //       if (icon === "Clouds") {
-          //         icon = (
-          //           <img
-          //             src={`http://openweathermap.org/img/w/${icon}.png`}
-          //             alt="weather image"
-          //           />
-          //         );
-          //       }
-        });
+        })
+        .catch((error) => console.log(error.message));
+
       setLocation("");
     }
   };
@@ -55,7 +50,7 @@ function InputBox() {
       <div className="searchBox">
         <input
           className="input"
-          placeholder="Please enter a location"
+          placeholder="Weather in your city"
           onChange={(event) => setLocation(event.target.value)}
           value={location}
           onKeyPress={findLocation}
@@ -68,6 +63,10 @@ function InputBox() {
             {city} {country}
           </h2>
           <p>{Math.round(temperature)}°C</p>
+          {/* <img
+            className="imageIcon"
+            src="http://openweathermap.org/img/wn/09d@2x.png"
+          /> */}
           <h3>{description}</h3>
         </div>
         <div className="content-child">

@@ -9,6 +9,7 @@ function Card({
   country,
   feelsLike,
 }) {
+  // bottom card section displaying user's personal weather information
   return (
     <div className="card">
       <div className="header">

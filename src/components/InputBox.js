@@ -1,11 +1,5 @@
 import axios from "axios";
 import React from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faCloud,
-//   faCloudRain,
-//   faSmog,
-// } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 function InputBox() {
   const [location, setLocation] = useState("");
@@ -17,11 +11,10 @@ function InputBox() {
   const [sunset, updateSunset] = useState(null);
   const [feelsLike, updateFeelsLike] = useState(null);
   const [description, updateDescription] = useState(null);
-  // const [weather, updateWeather] = useState(null);
-  // const [icon, updateIcon] = useState(null);
 
   const key = `5783354b44651863d0bd15ae06c6a392`;
 
+  // Logic to find and display data from input box
   const findLocation = (event) => {
     if (event.key === "Enter") {
       axios
@@ -29,7 +22,6 @@ function InputBox() {
           `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric&lang=en`
         )
         .then((weatherData) => {
-          // updateWeather(weatherData.data.weather[0].icon);
           updateTemperature(weatherData.data.main.temp);
           updateSunset(weatherData.data.sys.sunset);
           updateSunrise(weatherData.data.sys.sunrise);
@@ -39,7 +31,7 @@ function InputBox() {
           updateFeelsLike(weatherData.data.main.feels_like);
           updateDescription(weatherData.data.weather[0].description);
         })
-        .catch((error) => console.log(error.message));
+        .catch((error) => alert(error.message));
 
       setLocation("");
     }
@@ -63,10 +55,7 @@ function InputBox() {
             {city} {country}
           </h2>
           <p>{Math.round(temperature)}°C</p>
-          {/* <img
-            className="imageIcon"
-            src="http://openweathermap.org/img/wn/09d@2x.png"
-          /> */}
+
           <h3>{description}</h3>
         </div>
         <div className="content-child">
@@ -95,7 +84,6 @@ function InputBox() {
           </p>
         </div>
       </div>
-      {/* <div className="icons">{icon}</div> */}
     </div>
   );
 }

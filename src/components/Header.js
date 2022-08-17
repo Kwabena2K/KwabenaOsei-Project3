@@ -9,5 +9,3 @@ function Header() {
 }
 
 export default Header;
-
-//* background: linear-gradient(to bottom, #633799, #9d538e); */

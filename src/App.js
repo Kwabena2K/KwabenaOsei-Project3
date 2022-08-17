@@ -28,6 +28,8 @@ function App() {
     });
   }, []);
 
+  //logic to fetch data from api and retrieve relevant information
+
   useEffect(() => {
     axios
       .get(

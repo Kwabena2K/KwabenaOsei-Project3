@@ -1,11 +1,9 @@
 .app {
   background: linear-gradient(to bottom, #633799, #9d538e);
-  /* background: linear-gradient(to bottom, #2d7da7, #e1527a); */
   height: 100vh;
   padding-top: 50px;
   padding-left: auto;
   padding-right: auto;
-  /* padding-bottom: 100px; */
 }
 
 .App-logo {
@@ -30,19 +28,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .main {
   display: flex;
   flex-direction: column;
@@ -51,21 +36,19 @@
   padding: 20px 10px;
   border-radius: 10px;
   margin: 0px auto;
-  width: 800px;
+  width: 60vw;
   background: url("./assets/background-image.jpg");
   background-position: bottom;
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
   text-shadow: black 1px 0px 10px;
-  /* border: 2px solid red; */
 }
 
 .app-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 20px 10px; */
 }
 
 .app-header h1 {
@@ -91,6 +74,16 @@
   margin: 1rem auto;
   border-radius: 12px;
   text-align: center;
+}
+
+/* Weather card styling */
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px;
+  border-radius: 10px;
 }
 
 .card {
@@ -129,23 +122,11 @@
   align-items: center;
 }
 
-/* Weather card styling */
-.location {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* height: 150px; */
-  padding: 10px 10px;
-  border-radius: 10px;
-}
-
 .content-child p {
   font-size: 20px;
 }
 
 .searchBox {
-  /* padding: 10px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,12 +154,13 @@
   border-radius: 10px;
   font-size: 16px;
   color: black;
-  /* box-shadow: 0 3px 6px 0 #555; */
+
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.icons {
-  font-size: 20px;
-  /* width: 150px;
-  height: 150px; */
+@media screen {
+}
+
+/* Media Queries */
+@media (min-height: 320px) {
 }

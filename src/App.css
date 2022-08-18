@@ -1,5 +1,9 @@
-.App {
-  text-align: center;
+.app {
+  background: linear-gradient(to bottom, #633799, #9d538e);
+  height: 100vh;
+  padding-top: 50px;
+  padding-left: auto;
+  padding-right: auto;
 }
 
 .App-logo {
@@ -24,15 +28,139 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 3px 6px 0 #555;
+  padding: 20px 10px;
+  border-radius: 10px;
+  margin: 0px auto;
+  width: 50%;
+  background: url("./assets/background-image.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  text-shadow: black 1px 0px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-header h1 {
+  font-size: 25px;
+  margin: 20px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.header h3 {
+  font-weight: normal;
+  font-style: italic;
+}
+.header h2 {
+  text-align: center;
+}
+
+.header p {
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 100%;
+  font-size: 50px;
+  padding: 1rem;
+  margin: 1rem auto;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Weather card styling */
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: 0 3px 6px 0 #555;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+
+.card h2 {
+  padding-bottom: 20px;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.card h4 {
+  font-weight: 200;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.card p {
+  font-size: 15px;
+  text-transform: capitalize;
+  font-weight: 100;
+}
+
+.card-child {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-child p {
+  font-size: 20px;
+}
+
+.searchBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content p {
+  padding: 10px;
+  margin: 0;
+}
+
+.input {
+  padding: 15px;
+  width: 30%;
+  margin: 0 auto;
+  border-radius: 10px;
+  font-size: 16px;
+  color: black;
+
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+@media screen {
+}
+
+/* Media Queries */
+@media (min-height: 320px) {
 }

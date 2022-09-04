@@ -63,6 +63,12 @@ function App() {
           feelsLike={feelsLike}
         />
       </div>
+      <footer className="footerBottom">
+        <p>
+          Designed by <a href="https://kwabenaosei.com/">Kwabena</a> at Juno
+          College
+        </p>
+      </footer>
     </div>
   );
 }

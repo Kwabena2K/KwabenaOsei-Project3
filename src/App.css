@@ -1,7 +1,7 @@
 .app {
   background: linear-gradient(to bottom, #633799, #9d538e);
   height: 100vh;
-  padding-top: 50px;
+
   padding-left: auto;
   padding-right: auto;
 }
@@ -35,7 +35,10 @@
   box-shadow: 0 3px 6px 0 #555;
   padding: 20px 10px;
   border-radius: 10px;
-  margin: 0px auto;
+  /* margin: 0px auto; */
+  margin-right: auto;
+  margin-left: auto;
+  /* margin-top: 10px; */
   width: 50%;
   background: url("./assets/background-image.jpg");
   background-position: bottom;
@@ -166,11 +169,11 @@ footer {
   position: relative;
   /* bottom: 0px; */
   width: 100%;
-  padding: 25px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .footerBottom p {

@@ -48,28 +48,30 @@ function App() {
   }, [latitude, longitude]);
 
   return (
-    <div className="app">
-      <div className="main">
-        <Header />
-        <InputBox />
-        <Card
-          temperature={temperature}
-          humidity={humidity}
-          sunset={sunset}
-          sunrise={sunrise}
-          city={city}
-          country={country}
-          description={description}
-          feelsLike={feelsLike}
-        />
-      </div>
+    <>
+      <div className="app">
+        <div className="main">
+          <Header />
+          <InputBox />
+          <Card
+            temperature={temperature}
+            humidity={humidity}
+            sunset={sunset}
+            sunrise={sunrise}
+            city={city}
+            country={country}
+            description={description}
+            feelsLike={feelsLike}
+          />
+        </div>
+      </div>{" "}
       <footer className="footerBottom">
         <p>
           Designed by <a href="https://kwabenaosei.com/">Kwabena</a> at Juno
           College
         </p>
       </footer>
-    </div>
+    </>
   );
 }
 

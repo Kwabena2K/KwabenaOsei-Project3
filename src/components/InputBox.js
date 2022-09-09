@@ -42,7 +42,7 @@ function InputBox() {
       <div className="searchBox">
         <input
           className="input"
-          placeholder="Weather in your city"
+          placeholder="Enter a location"
           onChange={(event) => setLocation(event.target.value)}
           value={location}
           onKeyPress={findLocation}
